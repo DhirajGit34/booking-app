@@ -22,10 +22,9 @@ function BookingDetail() {
   const { booking, isLoading } = useBooking();
   const moveBack = useMoveBack();
 
-  if (isLoading) <Spinner />;
+  if (isLoading) return <Spinner />;
 
-  const { status, id: bookingId } = booking || {};
-  // console.log(booking);
+  const { status, id: bookingId } = booking;
 
   const statusToTagName = {
     unconfirmed: "blue",
@@ -43,7 +42,7 @@ function BookingDetail() {
         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
       </Row>
 
-      {/* <BookingDataBox booking={booking} /> */}
+      <BookingDataBox booking={booking} />
 
       <ButtonGroup>
         <Button variation="secondary" onClick={moveBack}>
