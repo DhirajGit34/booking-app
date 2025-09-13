@@ -12,7 +12,7 @@ export const useBooking = () => {
     error,
   } = useQuery({
     // uniquely indentify the data
-    queryKey: ["booking"],
+    queryKey: ["booking", bookingId],
     // actual query function : fetching the data 4m the api
     // its needs to return a promise
     queryFn: () => getBooking(bookingId),
