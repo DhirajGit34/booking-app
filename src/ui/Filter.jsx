@@ -47,6 +47,8 @@ const Filter = ({ filterField, options }) => {
     //1st step:  1st value is the name of the state 2. 2nd the value itself
     // take from the URL
     searchParams.set(filterField, value);
+    // for the  pagination conflict
+    if (searchParams.get("page")) searchParams.set("page", 1); // reset to page 1
     // set the new search params
     setSearchParams(searchParams);
   };
