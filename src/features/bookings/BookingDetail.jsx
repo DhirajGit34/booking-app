@@ -12,7 +12,7 @@ import { useMoveBack } from "../../hooks/useMoveBack";
 import { useBooking } from "./useBooking";
 import Spinner from "../../ui/Spinner";
 import { useNavigate } from "react-router-dom";
-import { HiArrowUpOnSquare } from "react-icons/hi2";
+import { HiArrowUpOnSquare, HiTrash } from "react-icons/hi2";
 import { useCheckout } from "../check-in-out/useCheckout";
 
 const HeadingGroup = styled.div`
@@ -64,7 +64,9 @@ function BookingDetail() {
             Check out
           </Button>
         )}
-
+        <Button icon={<HiTrash />} variation="danger" onClick={() => {}}>
+          Delete
+        </Button>
         <Button variation="secondary" onClick={moveBack}>
           Back
         </Button>
