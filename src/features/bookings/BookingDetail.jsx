@@ -5,7 +5,7 @@ import Row from "../../ui/Row";
 import Heading from "../../ui/Heading";
 import Tag from "../../ui/Tag";
 import ButtonGroup from "../../ui/ButtonGroup";
-import Button from "../../ui/Button";
+// import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
 
 import { useMoveBack } from "../../hooks/useMoveBack";
@@ -14,6 +14,10 @@ import Spinner from "../../ui/Spinner";
 import { useNavigate } from "react-router-dom";
 import { HiArrowUpOnSquare, HiTrash } from "react-icons/hi2";
 import { useCheckout } from "../check-in-out/useCheckout";
+import Modal from "../../ui/Modal";
+import ConfirmDelete from "../../ui/ConfirmDelete";
+import Menus from "../../ui/Menus";
+import Button from "../../ui/Button";
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -64,9 +68,17 @@ function BookingDetail() {
             Check out
           </Button>
         )}
-        <Button icon={<HiTrash />} variation="danger" onClick={() => {}}>
-          Delete
-        </Button>
+
+        <Modal>
+          <Modal.Open opens="delete">
+            <Button>delete</Button>
+          </Modal.Open>
+
+          <Modal.Window name="delete">
+            <ConfirmDelete resourceName="booking" />
+          </Modal.Window>
+        </Modal>
+
         <Button variation="secondary" onClick={moveBack}>
           Back
         </Button>
