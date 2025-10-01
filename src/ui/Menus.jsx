@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import PropTypes from "prop-types";
 import { createPortal } from "react-dom";
 import { HiEllipsisVertical } from "react-icons/hi2";
 import styled from "styled-components";
@@ -82,20 +83,28 @@ const Menus = ({ children }) => {
   );
 };
 
+Menus.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
 const Toggle = ({ id }) => {
   const { openId, open, close, setPosition } = useContext(MenusContext);
 
   const handleClick = (e) => {
-    // calculating the position of the menu
-    // fetching data about the position
-    const rect = e.target.closest("button").getBoundingClientRect();
-    // DOMRect{x: 1270.3875732421875, y: 254.8000030517578, width: 32, height: 32, top: 254.8000030517578}
-    setPosition({
-      x: window.innerWidth - rect.width - rect.x,
-      y: rect.y + rect.height + 8,
-    });
+    e.stopPropagation();
+    const isOpening = openId === "" || openId !== id;
 
-    openId === "" || openId !== id ? open(id) : close();
+    if (isOpening) {
+      // calculating the position of the menu only when opening
+      const rect = e.target.closest("button").getBoundingClientRect();
+      setPosition({
+        x: window.innerWidth - rect.width - rect.x,
+        y: rect.y + rect.height + 8,
+      });
+      open(id);
+    } else {
+      close();
+    }
   };
 
   return (
@@ -105,9 +114,14 @@ const Toggle = ({ id }) => {
   );
 };
 
+Toggle.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+};
+
 const List = ({ id, children }) => {
   const { openId, position, close } = useContext(MenusContext);
-  const ref = useOutsideClick(close);
+  // Listen in bubble phase to avoid pre-emptive close before toggle click handler runs
+  const ref = useOutsideClick(close, false);
   if (openId !== id) return null;
   // passing x,y props
   return createPortal(
@@ -116,6 +130,11 @@ const List = ({ id, children }) => {
     </StyledList>,
     document.body
   );
+};
+
+List.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 const Button = ({ children, icon, onClick }) => {
@@ -134,6 +153,12 @@ const Button = ({ children, icon, onClick }) => {
       </StyledButton>
     </li>
   );
+};
+
+Button.propTypes = {
+  children: PropTypes.node.isRequired,
+  icon: PropTypes.node,
+  onClick: PropTypes.func,
 };
 
 Menus.Menu = Menu; // is simple the styled components
