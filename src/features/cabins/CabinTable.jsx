@@ -6,6 +6,7 @@ import Menus from "../../ui/Menus";
 import { useSearchParams } from "react-router-dom";
 import Empty from "../../ui/Empty";
 import Pagination from "../../ui/Pagination";
+import { PAGE_SIZE } from "../../utils/constants";
 
 const CabinTable = () => {
   const { isLoading, cabins, error } = useCabin();
@@ -54,6 +55,18 @@ const CabinTable = () => {
     (a, b) => (a[field] - b[field]) * modifier
   );
 
+  // PAGINATION - Get current page from URL
+  const currentPage = !searchParams.get("page")
+    ? 1
+    : Number(searchParams.get("page"));
+
+  // Calculate start and end indices for current page
+  const startIndex = (currentPage - 1) * PAGE_SIZE;
+  const endIndex = startIndex + PAGE_SIZE;
+
+  // Get only the cabins for the current page
+  const paginatedCabins = sortedCabins.slice(startIndex, endIndex);
+
   return (
     <Menus>
       <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
@@ -68,12 +81,11 @@ const CabinTable = () => {
         {/* Render props */}
         {/* render props: we can tell what to do with each componenets */}
         <Table.Body
-          // data={filteredCabins}
-          data={sortedCabins}
+          data={paginatedCabins}
           render={(cabin) => <CabinRow key={cabin.id} cabin={cabin} />}
         />
         <Table.Footer>
-          <Pagination count={20} />
+          <Pagination count={filteredCabins.length} />
         </Table.Footer>
       </Table>
     </Menus>

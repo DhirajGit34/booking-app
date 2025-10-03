@@ -17,6 +17,8 @@ import { useNavigate } from "react-router-dom";
 import { useCheckout } from "../check-in-out/useCheckout";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
+import { deleteBooking } from "../../services/apiBookings";
+import { useDeleteBooking } from "./useDeleteBooking";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -60,8 +62,9 @@ function BookingRow({ booking }) {
   } = booking;
 
   const navigate = useNavigate();
+  // convert the status to checkin to checkout
   const { checkout, isCheckingout } = useCheckout();
-
+  const { deleteBooking, isDeleting } = useDeleteBooking();
   const statusToTagName = {
     unconfirmed: "blue",
     "checked-in": "green",
@@ -122,15 +125,15 @@ function BookingRow({ booking }) {
               </Menus.Button>
             )}
             <Modal.Open opens="delete">
-              <Menus.Button icon={<HiTrash />}>
-                Delete
-              </Menus.Button>
+              <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
             </Modal.Open>
           </Menus.List>
           <Modal.Window name="delete">
             <ConfirmDelete
               resourceName="booking"
-              // onConfirm={() => {}}
+              onConfirm={() => deleteBooking(bookingId)}
+              disabled={isDeleting}
+              onCloseModal={() => navigate("/bookings")}
             />
           </Modal.Window>
         </Menus.Menu>

@@ -1,5 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import styled, { css } from "styled-components";
+import PropTypes from "prop-types";
 
 const StyledFilter = styled.div`
   border: 1px solid var(--color-grey-100);
@@ -11,7 +12,9 @@ const StyledFilter = styled.div`
   gap: 0.4rem;
 `;
 
-const FilterButton = styled.button`
+const FilterButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => prop !== "active",
+})`
   background-color: var(--color-grey-0);
   border: none;
 
@@ -67,6 +70,16 @@ const Filter = ({ filterField, options }) => {
       ))}
     </StyledFilter>
   );
+};
+
+Filter.propTypes = {
+  filterField: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default Filter;
