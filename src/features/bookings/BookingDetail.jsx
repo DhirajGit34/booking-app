@@ -80,7 +80,6 @@ function BookingDetail() {
               resourceName="booking"
               onConfirm={() => deleteBooking(bookingId)}
               disabled={isDeleting}
-              // onCloseModal={moveBack}
             />
           </Modal.Window>
         </Modal>
