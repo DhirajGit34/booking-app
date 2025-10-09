@@ -52,7 +52,7 @@ const Button = styled.button`
   border: none;
   border-radius: var(--border-radius-sm);
   cursor: pointer;
-  ${(props) => variations[props.$variation]}
+  ${(props) => variations[props.variation]}
   ${(props) => sizes[props.size]}
 `;
 

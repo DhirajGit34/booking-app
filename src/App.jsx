@@ -14,8 +14,9 @@ import AppLayout from "./ui/AppLayout";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Toaster } from "react-hot-toast";
 import Checkin from "./pages/Checkin";
+import { Toaster } from "react-hot-toast";
+import ProtectedRoute from "./ui/ProtectedRoute";
 
 // 1. create a place where data lives
 // tanstack
@@ -39,7 +40,14 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             {/* its called layout because it doesnt hv path */}
-            <Route element={<AppLayout />}>
+            <Route
+              element={
+                // route for authorization
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              }
+            >
               <Route index element={<Navigate replace to="dashboard" />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="account" element={<Account />} />
