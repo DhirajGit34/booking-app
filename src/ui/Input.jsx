@@ -7,6 +7,9 @@ const Input = styled.input`
   border: 1px solid #ccc;
   margin: 5px;
   box-sizing: border-box;
+  width: 100%;
+  max-width: 36rem;
+  justify-self: start;
   &::placeholder {
     color: #aaa;
   }

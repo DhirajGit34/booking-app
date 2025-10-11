@@ -1,3 +1,20 @@
+// signup
+export const signup = async ({ fullName, email, password }) => {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        // we can pass here any kind of information about the user
+        fullName,
+        avatar: "",
+      },
+    },
+  });
+  if (error) throw new Error(error.message);
+  return data;
+};
+
 //1. gettign crendential from supabase
 import supabase from "./supabase";
 // getting the email and password form the user
@@ -21,6 +38,7 @@ export const getCurrentUser = async () => {
   if (error) throw new Error(error.message);
   return data?.user;
 };
+
 // for logout user
 export const logout = async () => {
   const { error } = await supabase.auth.signOut();
