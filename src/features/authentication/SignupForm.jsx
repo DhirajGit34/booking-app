@@ -20,7 +20,6 @@ function SignupForm() {
   const { signup, isLoading } = useSignup();
 
   const onSubmit = ({ fullName, email, password }) => {
-    // console.log(data);
     signup(
       { fullName, email, password },
       {
