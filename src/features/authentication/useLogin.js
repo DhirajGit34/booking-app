@@ -9,7 +9,7 @@ export const useLogin = () => {
   const navigate = useNavigate();
   const { mutate: login, isLoading } = useMutation({
     mutationFn: ({ email, password }) => loginApi({ email, password }),
-    onSuccess: (user) => {
+    onSuccess: user => {
       // take the newly login user and manually add them to react query cache for better and faster login
       queryClient.setQueryData(["user"], user.user);
       navigate("/dashboard", { replace: true });

@@ -16,7 +16,7 @@ export const useDeleteBooking = () => {
       // navigate to the bookings page
       navigate("/bookings");
     },
-    onError: (err) => toast.error(err.message),
+    onError: err => toast.error(err.message),
   });
 
   return { isDeleting, deleteBooking };

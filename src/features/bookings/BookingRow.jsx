@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { format, isToday } from "date-fns";
+import PropTypes from "prop-types";
 
 import Tag from "../../ui/Tag";
 import Table from "../../ui/Table";
@@ -17,7 +18,6 @@ import { useNavigate } from "react-router-dom";
 import { useCheckout } from "../check-in-out/useCheckout";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
-import { deleteBooking } from "../../services/apiBookings";
 import { useDeleteBooking } from "./useDeleteBooking";
 
 const Cabin = styled.div`
@@ -50,11 +50,9 @@ const Amount = styled.div`
 function BookingRow({ booking }) {
   const {
     id: bookingId,
-    created_at,
     startDate,
     endDate,
     numNights,
-    numGuests,
     totalPrice,
     status,
     guests: { fullName: guestName, email },
@@ -140,5 +138,23 @@ function BookingRow({ booking }) {
     </Table.Row>
   );
 }
+
+BookingRow.propTypes = {
+  booking: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    startDate: PropTypes.string.isRequired,
+    endDate: PropTypes.string.isRequired,
+    numNights: PropTypes.number.isRequired,
+    totalPrice: PropTypes.number.isRequired,
+    status: PropTypes.string.isRequired,
+    guests: PropTypes.shape({
+      fullName: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired,
+    }).isRequired,
+    cabins: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
 export default BookingRow;

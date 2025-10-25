@@ -16,7 +16,7 @@ export const signup = async ({ fullName, email, password }) => {
 };
 
 //1. gettign crendential from supabase
-import supabase from "./supabase";
+import supabase, { supabaseUrl } from "./supabase";
 // getting the email and password form the user
 export const login = async ({ email, password }) => {
   const { data, error } = await supabase.auth.signInWithPassword({
@@ -43,4 +43,34 @@ export const getCurrentUser = async () => {
 export const logout = async () => {
   const { error } = await supabase.auth.signOut();
   if (error) throw new Error(error.message);
+};
+
+// update user
+export const updateCurrentUser = async ({ password, fullName, avatar }) => {
+  // 1. update password or name
+  let updateData;
+  if (password) updateData = { password };
+  if (fullName) updateData = { data: { fullName } };
+
+  const { data, error } = await supabase.auth.updateUser(updateData);
+
+  if (error) throw new Error(error.message);
+  if (!avatar) return data;
+
+  // 2. Upload a avatar image
+  const fileName = `avatar-${data.user.id}-${Math.random()}`;
+  const { error: storageError } = await supabase.storage
+    .from("avatars")
+    .upload(fileName, avatar);
+  if (storageError) throw new Error(error.message);
+
+  // 3. update avatar in the user
+  const { data: updateUser, error: avatarError } =
+    await supabase.auth.updateUser({
+      data: {
+        avatar: `${supabaseUrl}/storage/v1/object/public/avatars/${fileName}`,
+      },
+    });
+  if (avatarError) throw new Error(error.message);
+  return updateUser;
 };

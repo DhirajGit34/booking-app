@@ -6,7 +6,7 @@ const SortBy = ({ options }) => {
   // empty string is for to just select the first element
   // getting currently selected value
   const sortBy = searchParams.get("sortBy") || "";
-  const handleChange = (e) => {
+  const handleChange = e => {
     searchParams.set("sortBy", e.target.value);
     setSearchParams(searchParams);
   };

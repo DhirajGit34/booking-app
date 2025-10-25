@@ -5,11 +5,11 @@ import toast from "react-hot-toast";
 export const useCheckout = () => {
   const queryClient = useQueryClient();
   const { mutate: checkout, isLoading: isCheckingout } = useMutation({
-    mutationFn: (bookingId) =>
+    mutationFn: bookingId =>
       updateBooking(bookingId, {
-        status: "checked-out"
+        status: "checked-out",
       }),
-    onSuccess: (data) => {
+    onSuccess: data => {
       toast.success(`Guest ${data.id} successfully checked out`);
       // other way to invalidate queries "active:true"
       queryClient.invalidateQueries({

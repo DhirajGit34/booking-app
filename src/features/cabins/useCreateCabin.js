@@ -14,7 +14,7 @@ export const useCreateCabin = () => {
       });
       // reset is not working here, as reset is not defined in this context, the reset function is part of the useForm
     },
-    onError: (err) => {
+    onError: err => {
       toast.error(err.message);
     },
   });

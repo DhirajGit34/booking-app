@@ -83,7 +83,7 @@ function CheckinBooking() {
           <Checkbox
             checked={addBreakfast}
             onChange={() => {
-              setAddBreakfast((add) => !add);
+              setAddBreakfast(add => !add);
               setConfirmPaid(false);
             }}
             id="breakfast"
@@ -96,7 +96,7 @@ function CheckinBooking() {
       <Box>
         <Checkbox
           checked={confirmPaid}
-          onChange={() => setConfirmPaid((confirm) => !confirm)}
+          onChange={() => setConfirmPaid(confirm => !confirm)}
           id="confirm"
           disabled={confirmPaid || isCheckingIn}
         >

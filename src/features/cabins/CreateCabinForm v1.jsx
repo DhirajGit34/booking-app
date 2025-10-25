@@ -28,14 +28,14 @@ function CreateCabinForm() {
       });
       reset(); // reset the form after successful submission
     },
-    onError: (err) => {
+    onError: err => {
       toast.error(err.message);
     },
   });
 
   // handle form submission
   // handle form submission
-  const onSubmit = (data) => {
+  const onSubmit = data => {
     // passing the image
     mutate({ data, image: data.image[0] });
   };
@@ -103,7 +103,7 @@ function CreateCabinForm() {
             required: "This field is required",
             // function that handle discount should not greater than regular price
             // value= current value of the input
-            validate: (value) =>
+            validate: value =>
               parseFloat(value) <= parseFloat(getValues().regularPrice) ||
               "Discount should be less than regular price",
             min: {

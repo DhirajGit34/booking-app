@@ -80,7 +80,7 @@ function SignupForm() {
           id="passwordConfirm"
           {...register("passwordConfirm", {
             required: "This field is required",
-            validate: (value) =>
+            validate: value =>
               value === getValues().password || "Passwords need to match",
           })}
           disabled={isLoading}
@@ -89,7 +89,12 @@ function SignupForm() {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button disabled={isLoading} variation="secondary" type="reset">
+        <Button
+          disabled={isLoading}
+          variation="secondary"
+          type="reset"
+          onClick={reset}
+        >
           Cancel
         </Button>
         <Button disabled={isLoading}>

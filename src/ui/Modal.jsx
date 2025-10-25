@@ -61,7 +61,7 @@ const Modal = ({ children }) => {
   // opening and closing modal
   const close = () => setOpenName("");
   // const open = () => setOpenName;
-  const open = (windowName) => setOpenName(windowName);
+  const open = windowName => setOpenName(windowName);
 
   return (
     <ModalContext.Provider value={{ openName, close, open }}>

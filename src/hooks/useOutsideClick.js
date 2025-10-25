@@ -4,7 +4,7 @@ export const useOutsideClick = (handler, listenCapturing = true) => {
   const ref = useRef();
 
   useEffect(() => {
-    const handleClick = (e) => {
+    const handleClick = e => {
       if (ref.current && !ref.current.contains(e.target)) {
         handler();
       }

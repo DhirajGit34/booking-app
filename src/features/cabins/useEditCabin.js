@@ -13,7 +13,7 @@ export const useEditCabin = () => {
         queryKey: ["cabins"],
       });
     },
-    onError: (err) => {
+    onError: err => {
       toast.error(err.message);
     },
   });

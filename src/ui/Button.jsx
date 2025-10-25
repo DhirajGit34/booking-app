@@ -52,8 +52,8 @@ const Button = styled.button`
   border: none;
   border-radius: var(--border-radius-sm);
   cursor: pointer;
-  ${(props) => variations[props.variation]}
-  ${(props) => sizes[props.size]}
+  ${props => variations[props.variation]}
+  ${props => sizes[props.size]}
 `;
 
 Button.defaultProps = {

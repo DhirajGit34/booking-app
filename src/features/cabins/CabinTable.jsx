@@ -31,7 +31,7 @@ const CabinTable = () => {
   //   filteredCabin = cabins.filter((cabin) => cabin.discount > 0);
 
   // // filter logic
-  const filteredCabins = cabins.filter((cabin) => {
+  const filteredCabins = cabins.filter(cabin => {
     switch (filterValue) {
       case "all":
         return true; // Keep all cabins
@@ -82,7 +82,7 @@ const CabinTable = () => {
         {/* render props: we can tell what to do with each componenets */}
         <Table.Body
           data={paginatedCabins}
-          render={(cabin) => <CabinRow key={cabin.id} cabin={cabin} />}
+          render={cabin => <CabinRow key={cabin.id} cabin={cabin} />}
         />
         <Table.Footer>
           <Pagination count={filteredCabins.length} />

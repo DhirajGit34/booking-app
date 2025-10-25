@@ -37,8 +37,8 @@ const StyledList = styled.ul`
   box-shadow: var(--shadow-md);
   border-radius: var(--border-radius-md);
 
-  right: ${(props) => props.position.x}px;
-  top: ${(props) => props.position.y}px;
+  right: ${props => props.position.x}px;
+  top: ${props => props.position.y}px;
 `;
 
 const StyledButton = styled.button`
@@ -90,7 +90,7 @@ Menus.propTypes = {
 const Toggle = ({ id }) => {
   const { openId, open, close, setPosition } = useContext(MenusContext);
 
-  const handleClick = (e) => {
+  const handleClick = e => {
     e.stopPropagation();
     const isOpening = openId === "" || openId !== id;
 

@@ -13,12 +13,12 @@ const StyledFilter = styled.div`
 `;
 
 const FilterButton = styled.button.withConfig({
-  shouldForwardProp: (prop) => prop !== "active",
+  shouldForwardProp: prop => prop !== "active",
 })`
   background-color: var(--color-grey-0);
   border: none;
 
-  ${(props) =>
+  ${props =>
     props.active &&
     css`
       background-color: var(--color-brand-600);
@@ -45,7 +45,7 @@ const Filter = ({ filterField, options }) => {
 
   const currentFilter = searchParams.get(filterField) || options.at(0).value;
 
-  const handleClick = (value) => {
+  const handleClick = value => {
     //set the task
     //1st step:  1st value is the name of the state 2. 2nd the value itself
     // take from the URL
@@ -58,7 +58,7 @@ const Filter = ({ filterField, options }) => {
 
   return (
     <StyledFilter>
-      {options.map((option) => (
+      {options.map(option => (
         <FilterButton
           key={option.value}
           active={currentFilter === option.value}

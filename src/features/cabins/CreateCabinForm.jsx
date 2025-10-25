@@ -23,7 +23,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
 
   const isWorking = isCreating || isEditing;
 
-  const onSubmit = (data) => {
+  const onSubmit = data => {
     //checking image type
     const image = typeof data.image === "string" ? data.image : data.image[0];
 
@@ -102,7 +102,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
             required: "This field is required",
             // function that handle discount should not greater than regular price
             // value= current value of the input
-            validate: (value) =>
+            validate: value =>
               parseFloat(value) <= parseFloat(getValues().regularPrice) ||
               "Discount should be less than regular price",
             min: {

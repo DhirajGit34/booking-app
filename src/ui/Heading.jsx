@@ -10,27 +10,27 @@ import styled, { css } from "styled-components";
 /* font-size: ${10 > 5 ? "30px" : "20px"}; */
 const Heading = styled.h1`
   //receiving the props
-  ${(props) =>
+  ${props =>
     props.as === "h1" &&
     css`
       font-size: 3rem;
       font-weight: 600;
     `}
 
-  ${(props) =>
+  ${props =>
     props.as === "h2" &&
     css`
       font-size: 2rem;
       font-weight: 600;
     `}
 
-  ${(props) =>
+  ${props =>
     props.as === "h3" &&
     css`
       font-size: 2rem;
       font-weight: 500;
     `}
-  ${(props) =>
+  ${props =>
     props.as === "h4" &&
     css`
       font-size: 3rem;

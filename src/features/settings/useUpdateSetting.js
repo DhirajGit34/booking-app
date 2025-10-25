@@ -13,7 +13,7 @@ export const useUpdateSetting = () => {
         queryKey: ["setting"],
       });
     },
-    onError: (err) => {
+    onError: err => {
       toast.error(err.message);
     },
   });

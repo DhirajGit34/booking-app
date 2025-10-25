@@ -9,7 +9,7 @@ const StyledFormRow = styled.div`
 
   padding: 1.2rem 0;
   border-bottom: 1px solid
-    ${(props) =>
+    ${props =>
       props.$hasError ? "var(--color-red-100)" : "var(--color-grey-100)"};
 
   &:first-child {

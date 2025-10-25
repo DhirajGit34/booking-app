@@ -13,7 +13,7 @@ export const useCheckin = () => {
         isPaid: true,
         ...breakfast,
       }),
-    onSuccess: (data) => {
+    onSuccess: data => {
       toast.success(`Guest ${data.id} successfully checked in`);
       // other way to invalidate queries "active:true"
       queryClient.invalidateQueries({

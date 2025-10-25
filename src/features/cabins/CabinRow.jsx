@@ -59,7 +59,7 @@ const CabinRow = ({ cabin }) => {
   } = cabin;
 
   const { isDeleting, deleteCabin } = useDeleteCabin();
-  const { isCreating, createCabin } = useCreateCabin();
+  const { createCabin } = useCreateCabin();
   //duplicationg the cabin
   const handleDuplicate = () => {
     // hv to pass the object
