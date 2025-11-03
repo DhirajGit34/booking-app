@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Heading from "../../ui/Heading";
 import {
   Cell,
+  Label,
   Legend,
   Pie,
   PieChart,
@@ -151,6 +152,7 @@ const DurationChart = ({ confirmedStays }) => {
       <Heading as="h2">Stay Duration Summary</Heading>
       <ResponsiveContainer width="100%" height={240}>
         <PieChart>
+          {data.length === 0 && <Label value="No data" />}
           <Pie
             data={data}
             nameKey="duration"
