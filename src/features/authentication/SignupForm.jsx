@@ -3,7 +3,7 @@ import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
-import { useSignup } from "./useSignUp";
+import { useSignup } from "./useSignup";
 import SpinnerMini from "../../ui/SpinnerMini";
 
 // Email regex: /\S+@\S+\.\S+/
@@ -80,7 +80,7 @@ function SignupForm() {
           id="passwordConfirm"
           {...register("passwordConfirm", {
             required: "This field is required",
-            validate: value =>
+            validate: (value) =>
               value === getValues().password || "Passwords need to match",
           })}
           disabled={isLoading}
