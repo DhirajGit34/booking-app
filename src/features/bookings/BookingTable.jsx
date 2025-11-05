@@ -21,12 +21,13 @@ function BookingTable() {
           <div>Dates</div>
           <div>Status</div>
           <div>Amount</div>
-          <div></div>
         </Table.Header>
 
         <Table.Body
           data={bookings}
-          render={booking => <BookingRow key={booking.id} booking={booking} />}
+          render={(booking) => (
+            <BookingRow key={booking.id} booking={booking} />
+          )}
         />
         <Table.Footer>
           <Pagination count={count} />
